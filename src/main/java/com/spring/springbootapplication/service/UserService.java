@@ -5,6 +5,8 @@ import com.spring.springbootapplication.mapper.UserMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 public class UserService {
 
@@ -21,7 +23,6 @@ public class UserService {
     }
 
     public void register(RegisterForm form) {
-
         String hashedPassword =
             passwordEncoder.encode(form.getPassword());
 
@@ -30,5 +31,28 @@ public class UserService {
             hashedPassword,
             form.getUserName()
         );
+    }
+
+    public Map<String, Object> authenticate(
+            String email,
+            String rawPassword) {
+
+        Map<String, Object> user =
+            userMapper.findByEmail(email);
+
+        if (user == null) {
+            return null;
+        }
+
+        String hashedPassword =
+            (String) user.get("password");
+
+        if (!passwordEncoder.matches(
+                rawPassword,
+                hashedPassword)) {
+            return null;
+        }
+
+        return user;
     }
 }

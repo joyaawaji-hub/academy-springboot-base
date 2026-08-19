@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.Map;
+
 @Mapper
 public interface UserMapper {
 
@@ -36,4 +38,15 @@ public interface UserMapper {
         WHERE email = #{email}
         """)
     int countByEmail(@Param("email") String email);
+
+    @Select("""
+        SELECT
+            id,
+            email,
+            password,
+            user_name
+        FROM users
+        WHERE email = #{email}
+        """)
+    Map<String, Object> findByEmail(@Param("email") String email);
 }
