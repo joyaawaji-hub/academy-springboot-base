@@ -25,16 +25,12 @@
 
         <div class="profile-left">
 
-            <div class="avatar-placeholder">
-                <span>Profile</span>
-            </div>
+            <div class="avatar-placeholder"></div>
 
             <p
                 class="user-name"
-                th:text="${session.loginUserName != null ? session.loginUserName : 'ユーザー名'}"
-            >
-                ユーザー名
-            </p>
+                th:text="${session.loginUserName}"
+            ></p>
 
         </div>
 
@@ -44,56 +40,11 @@
                 自己紹介
             </h2>
 
-            <p class="introduction-text">
-                自分の自己紹介文が入ります。
-                今後プロフィール編集機能を実装した際に、
-                登録した自己紹介文をここに表示します。
-            </p>
+            <p class="introduction-text"></p>
 
             <button type="button" class="edit-button">
                 自己紹介を編集する
             </button>
-
-        </div>
-
-    </section>
-
-    <section class="chart-section">
-
-        <h2 class="section-title chart-title">
-            学習チャート
-        </h2>
-
-        <button type="button" class="edit-button">
-            編集する
-        </button>
-
-        <div class="chart-placeholder">
-
-            <div class="chart-bars">
-
-                <div class="bar-group">
-                    <div class="bar bar-small"></div>
-                    <div class="bar bar-medium"></div>
-                    <div class="bar bar-large"></div>
-                    <span>先々月</span>
-                </div>
-
-                <div class="bar-group">
-                    <div class="bar bar-small"></div>
-                    <div class="bar bar-medium"></div>
-                    <div class="bar bar-large"></div>
-                    <span>先月</span>
-                </div>
-
-                <div class="bar-group">
-                    <div class="bar bar-small"></div>
-                    <div class="bar bar-medium"></div>
-                    <div class="bar bar-large"></div>
-                    <span>今月</span>
-                </div>
-
-            </div>
 
         </div>
 
