@@ -3,14 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>TOP | My Portfolio</title>
+
+    <link rel="stylesheet" th:href="@{/css/top.css}">
 </head>
 
 <body>
 
-<h1>TOPページ</h1>
+<header class="top-header">
+    <h1 class="site-title">My Portfolio</h1>
 
-<p>新規登録が完了しました。</p>
+    <a th:href="@{/logout}" class="logout-button">
+        ログアウト
+    </a>
+</header>
+
+<main class="top-container">
+
+    <section class="profile-section">
+
+        <div class="profile-left">
+
+            <div class="avatar-placeholder">
+                <span>Profile</span>
+            </div>
+
+            <p
+                class="user-name"
+                th:text="${session.loginUserName != null ? session.loginUserName : 'ユーザー名'}"
+            >
+                ユーザー名
+            </p>
+
+        </div>
+
+        <div class="profile-right">
+
+            <h2 class="section-title">
+                自己紹介
+            </h2>
+
+            <p class="introduction-text">
+                自分の自己紹介文が入ります。
+                今後プロフィール編集機能を実装した際に、
+                登録した自己紹介文をここに表示します。
+            </p>
+
+            <button type="button" class="edit-button">
+                自己紹介を編集する
+            </button>
+
+        </div>
+
+    </section>
+
+    <section class="chart-section">
+
+        <h2 class="section-title chart-title">
+            学習チャート
+        </h2>
+
+        <button type="button" class="edit-button">
+            編集する
+        </button>
+
+        <div class="chart-placeholder">
+
+            <div class="chart-bars">
+
+                <div class="bar-group">
+                    <div class="bar bar-small"></div>
+                    <div class="bar bar-medium"></div>
+                    <div class="bar bar-large"></div>
+                    <span>先々月</span>
+                </div>
+
+                <div class="bar-group">
+                    <div class="bar bar-small"></div>
+                    <div class="bar bar-medium"></div>
+                    <div class="bar bar-large"></div>
+                    <span>先月</span>
+                </div>
+
+                <div class="bar-group">
+                    <div class="bar bar-small"></div>
+                    <div class="bar bar-medium"></div>
+                    <div class="bar bar-large"></div>
+                    <span>今月</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer class="footer">
+    <p>portfolio site</p>
+</footer>
 
 </body>
 </html>
