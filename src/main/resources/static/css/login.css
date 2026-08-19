@@ -255,3 +255,39 @@ body {
     color: #e53935;
     font-size: 8px;
 }
+
+/* =========================
+   新規登録画面専用ヘッダー
+========================= */
+
+.register-header {
+    height: 56px;
+    padding: 0 24px;
+
+    background-color: #1f5d7d;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-login-button {
+    width: 82px;
+    height: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #fff;
+    color: #555;
+
+    border-radius: 2px;
+
+    text-decoration: none;
+    font-size: 9px;
+}
+
+.header-login-button:hover {
+    opacity: 0.9;
+}
