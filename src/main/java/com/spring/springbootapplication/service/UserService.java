@@ -55,4 +55,20 @@ public class UserService {
 
         return user;
     }
+
+    public Map<String, Object> findByEmail(String email) {
+        return userMapper.findByEmail(email);
+    }
+
+    public void updateProfile(
+            String email,
+            String selfIntroduction,
+            String avatarImage) {
+
+        userMapper.updateProfile(
+            email,
+            selfIntroduction,
+            avatarImage
+        );
+    }
 }

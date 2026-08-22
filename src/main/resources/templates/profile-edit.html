@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>自己紹介編集 | My Portfolio</title>
+
+    <link rel="stylesheet" th:href="@{/css/profile-edit.css}">
+</head>
+
+<body>
+
+<header class="profile-header">
+    <h1 class="site-title">My Portfolio</h1>
+
+    <a th:href="@{/logout}" class="logout-button">
+        ログアウト
+    </a>
+</header>
+
+<main class="profile-edit-container">
+
+    <h2 class="page-title">
+        自己紹介を編集する
+    </h2>
+
+    <form
+        th:action="@{/profile/edit}"
+        th:object="${profileForm}"
+        method="post"
+        enctype="multipart/form-data"
+        class="profile-form"
+    >
+
+        <div class="form-group">
+
+            <label for="selfIntroduction">
+                自己紹介文
+            </label>
+
+            <textarea
+                id="selfIntroduction"
+                th:field="*{selfIntroduction}"
+                maxlength="200"
+            ></textarea>
+
+            <p class="help-text">
+                50文字以上、200文字以下で入力してください
+            </p>
+
+            <p
+                class="error-message"
+                th:if="${#fields.hasErrors('selfIntroduction')}"
+                th:errors="*{selfIntroduction}"
+            ></p>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="avatarImage">
+                アバター画像
+            </label>
+
+            <input
+                type="file"
+                id="avatarImage"
+                name="avatarImage"
+                accept="image/*"
+            >
+
+            <p
+                id="fileName"
+                class="file-name"
+                th:text="${currentAvatarImage}"
+            ></p>
+
+        </div>
+
+        <button
+            type="submit"
+            class="confirm-button"
+        >
+            自己紹介を確定する
+        </button>
+
+    </form>
+
+</main>
+
+<footer class="footer">
+    <p>portfolio site</p>
+</footer>
+
+<script>
+    const avatarInput = document.getElementById('avatarImage');
+    const fileName = document.getElementById('fileName');
+
+    avatarInput.addEventListener('change', function () {
+        if (this.files.length > 0) {
+            fileName.textContent = this.files[0].name;
+        } else {
+            fileName.textContent = '';
+        }
+    });
+</script>
+
+</body>
+</html>

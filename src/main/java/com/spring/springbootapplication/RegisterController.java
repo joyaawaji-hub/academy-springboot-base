@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Map;
+
 @Controller
 public class RegisterController {
 
@@ -53,11 +55,21 @@ public class RegisterController {
     }
 
     @GetMapping("/top")
-    public String top(HttpSession session) {
+    public String top(
+            HttpSession session,
+            Model model) {
 
-        if (session.getAttribute("loginUserEmail") == null) {
+        String email =
+            (String) session.getAttribute("loginUserEmail");
+
+        if (email == null) {
             return "redirect:/login";
         }
+
+        Map<String, Object> user =
+            userService.findByEmail(email);
+
+        model.addAttribute("user", user);
 
         return "top";
     }
