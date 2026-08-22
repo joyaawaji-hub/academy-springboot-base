@@ -54,6 +54,10 @@ public class LoginController {
 
             return "redirect:/login";
         }
+        session.setAttribute(
+            "loginUserId",
+            user.get("id")
+        );
 
         session.setAttribute(
             "loginUserEmail",
