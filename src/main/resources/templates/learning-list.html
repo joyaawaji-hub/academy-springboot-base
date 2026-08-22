@@ -41,18 +41,18 @@
     </form>
 
 
-    <!-- =========================
-         バックエンド
-    ========================== -->
-
+    <!-- バックエンド -->
     <section class="category-card">
 
         <div class="category-header">
             <h2>バックエンド</h2>
 
-            <a th:href="@{/learning/add(categoryId=1, month=${selectedMonth})}" class="add-button">
-    項目を追加する
-</a>
+            <a
+                th:href="@{/learning/add(categoryId=1, month=${selectedMonth})}"
+                class="add-button"
+            >
+                項目を追加する
+            </a>
         </div>
 
         <div class="title-line"></div>
@@ -64,24 +64,47 @@
             <span></span>
         </div>
 
-        <div
-            class="learning-row"
+        <form
             th:each="data : ${learningData}"
             th:if="${data['category_name'] == 'バックエンド' and data['learning_id'] != null}"
+            th:action="@{/learning/edit}"
+            method="post"
+            class="learning-row"
         >
+            <input
+                type="hidden"
+                name="learningId"
+                th:value="${data['learning_id']}"
+            >
+
+            <input
+                type="hidden"
+                name="month"
+                th:value="${selectedMonth}"
+            >
+
+            <input
+                type="hidden"
+                name="itemName"
+                th:value="${data['item_name']}"
+            >
+
             <span
                 class="item-name"
                 th:text="${data['item_name']}"
             ></span>
 
-            <div class="hour-box">
-                <span th:text="${data['learning_hours']}"></span>
-            </div>
+            <input
+                type="number"
+                name="learningHours"
+                class="hour-input"
+                min="0"
+                th:value="${data['learning_hours']}"
+            >
 
             <button
-                type="button"
+                type="submit"
                 class="save-button"
-                disabled
             >
                 学習時間を保存する
             </button>
@@ -93,23 +116,23 @@
             >
                 削除する
             </button>
-        </div>
+        </form>
 
     </section>
 
 
-    <!-- =========================
-         フロントエンド
-    ========================== -->
-
+    <!-- フロントエンド -->
     <section class="category-card">
 
         <div class="category-header">
             <h2>フロントエンド</h2>
 
-            <a th:href="@{/learning/add(categoryId=2, month=${selectedMonth})}" class="add-button">
-    項目を追加する
-</a>
+            <a
+                th:href="@{/learning/add(categoryId=2, month=${selectedMonth})}"
+                class="add-button"
+            >
+                項目を追加する
+            </a>
         </div>
 
         <div class="title-line"></div>
@@ -121,24 +144,47 @@
             <span></span>
         </div>
 
-        <div
-            class="learning-row"
+        <form
             th:each="data : ${learningData}"
             th:if="${data['category_name'] == 'フロントエンド' and data['learning_id'] != null}"
+            th:action="@{/learning/edit}"
+            method="post"
+            class="learning-row"
         >
+            <input
+                type="hidden"
+                name="learningId"
+                th:value="${data['learning_id']}"
+            >
+
+            <input
+                type="hidden"
+                name="month"
+                th:value="${selectedMonth}"
+            >
+
+            <input
+                type="hidden"
+                name="itemName"
+                th:value="${data['item_name']}"
+            >
+
             <span
                 class="item-name"
                 th:text="${data['item_name']}"
             ></span>
 
-            <div class="hour-box">
-                <span th:text="${data['learning_hours']}"></span>
-            </div>
+            <input
+                type="number"
+                name="learningHours"
+                class="hour-input"
+                min="0"
+                th:value="${data['learning_hours']}"
+            >
 
             <button
-                type="button"
+                type="submit"
                 class="save-button"
-                disabled
             >
                 学習時間を保存する
             </button>
@@ -150,23 +196,23 @@
             >
                 削除する
             </button>
-        </div>
+        </form>
 
     </section>
 
 
-    <!-- =========================
-         インフラ
-    ========================== -->
-
+    <!-- インフラ -->
     <section class="category-card">
 
         <div class="category-header">
             <h2>インフラ</h2>
 
-            <a th:href="@{/learning/add(categoryId=3, month=${selectedMonth})}" class="add-button">
-    項目を追加する
-</a>
+            <a
+                th:href="@{/learning/add(categoryId=3, month=${selectedMonth})}"
+                class="add-button"
+            >
+                項目を追加する
+            </a>
         </div>
 
         <div class="title-line"></div>
@@ -178,24 +224,47 @@
             <span></span>
         </div>
 
-        <div
-            class="learning-row"
+        <form
             th:each="data : ${learningData}"
             th:if="${data['category_name'] == 'インフラ' and data['learning_id'] != null}"
+            th:action="@{/learning/edit}"
+            method="post"
+            class="learning-row"
         >
+            <input
+                type="hidden"
+                name="learningId"
+                th:value="${data['learning_id']}"
+            >
+
+            <input
+                type="hidden"
+                name="month"
+                th:value="${selectedMonth}"
+            >
+
+            <input
+                type="hidden"
+                name="itemName"
+                th:value="${data['item_name']}"
+            >
+
             <span
                 class="item-name"
                 th:text="${data['item_name']}"
             ></span>
 
-            <div class="hour-box">
-                <span th:text="${data['learning_hours']}"></span>
-            </div>
+            <input
+                type="number"
+                name="learningHours"
+                class="hour-input"
+                min="0"
+                th:value="${data['learning_hours']}"
+            >
 
             <button
-                type="button"
+                type="submit"
                 class="save-button"
-                disabled
             >
                 学習時間を保存する
             </button>
@@ -207,7 +276,7 @@
             >
                 削除する
             </button>
-        </div>
+        </form>
 
     </section>
 
@@ -216,6 +285,27 @@
 <footer class="footer">
     <p>portfolio site</p>
 </footer>
+
+
+<div
+    class="modal-overlay"
+    th:if="${showEditSuccessModal}"
+>
+    <div class="success-modal">
+
+        <p class="success-message">
+            <span th:text="${editedItemName}"></span>の学習時間を編集しました！
+        </p>
+
+        <a
+            th:href="@{/learning(month=${selectedMonth})}"
+            class="back-button"
+        >
+            編集ページに戻る
+        </a>
+
+    </div>
+</div>
 
 </body>
 </html>

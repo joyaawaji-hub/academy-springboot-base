@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -79,6 +80,20 @@ public interface LearningMapper {
         @Param("categoryId") Long categoryId,
         @Param("itemName") String itemName,
         @Param("learningMonth") LocalDate learningMonth,
+        @Param("learningHours") Integer learningHours
+    );
+
+    @Update("""
+        UPDATE learning_data
+        SET
+            learning_hours = #{learningHours},
+            updated_at = CURRENT_TIMESTAMP
+        WHERE id = #{learningId}
+          AND user_id = #{userId}
+        """)
+    void updateLearningHours(
+        @Param("learningId") Long learningId,
+        @Param("userId") Long userId,
         @Param("learningHours") Integer learningHours
     );
 }

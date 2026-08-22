@@ -59,4 +59,15 @@ public class LearningService {
             learningHours
         );
     }
-}
+
+    public void updateLearningHours(
+            Long learningId,
+            Long userId,
+            Integer learningHours) {
+
+        learningMapper.updateLearningHours(
+            learningId,
+            userId,
+            learningHours
+        );
+    }}
