@@ -161,12 +161,17 @@ body {
     width: 80px;
     height: 24px;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     border: none;
     border-radius: 2px;
 
     background-color: #1f5d7d;
     color: #fff;
 
+    text-decoration: none;
     font-size: 7px;
 }
 
@@ -308,6 +313,7 @@ button:disabled {
 
     color: #fff;
 
+    text-decoration: none;
     font-size: 7px;
 }
 
