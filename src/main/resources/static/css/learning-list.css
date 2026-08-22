@@ -351,3 +351,84 @@ button:disabled {
         width: 50px;
     }
 }
+/* =========================
+   学習時間編集
+========================= */
+
+.hour-input {
+    width: 72px;
+    height: 22px;
+
+    padding: 0 7px;
+
+    border: 1px solid #ccc;
+    border-radius: 2px;
+
+    background-color: #fff;
+    color: #777;
+
+    font-size: 7px;
+}
+
+
+/* =========================
+   編集完了モーダル
+========================= */
+
+.modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgba(0, 0, 0, 0.6);
+
+    z-index: 100;
+}
+
+.success-modal {
+    width: 290px;
+    min-height: 108px;
+
+    padding: 22px 25px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #fff;
+
+    text-align: center;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.success-message {
+    margin: 0 0 18px;
+
+    font-size: 9px;
+    font-weight: bold;
+    line-height: 1.7;
+}
+
+.back-button {
+    width: 86px;
+    height: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 2px;
+
+    background-color: #1f5d7d;
+    color: #fff;
+
+    text-decoration: none;
+    font-size: 7px;
+}
