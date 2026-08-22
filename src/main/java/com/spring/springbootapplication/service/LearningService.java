@@ -25,4 +25,38 @@ public class LearningService {
             learningMonth
         );
     }
+
+    public String findCategoryName(Long categoryId) {
+        return learningMapper.findCategoryNameById(categoryId);
+    }
+
+    public boolean existsDuplicate(
+            Long userId,
+            Long categoryId,
+            String itemName,
+            LocalDate learningMonth) {
+
+        return learningMapper.countDuplicate(
+            userId,
+            categoryId,
+            itemName,
+            learningMonth
+        ) > 0;
+    }
+
+    public void addLearningData(
+            Long userId,
+            Long categoryId,
+            String itemName,
+            LocalDate learningMonth,
+            Integer learningHours) {
+
+        learningMapper.insertLearningData(
+            userId,
+            categoryId,
+            itemName,
+            learningMonth,
+            learningHours
+        );
+    }
 }

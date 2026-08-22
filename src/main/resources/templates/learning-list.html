@@ -50,13 +50,9 @@
         <div class="category-header">
             <h2>バックエンド</h2>
 
-            <button
-                type="button"
-                class="add-button"
-                disabled
-            >
-                項目を追加する
-            </button>
+            <a th:href="@{/learning/add(categoryId=1, month=${selectedMonth})}" class="add-button">
+    項目を追加する
+</a>
         </div>
 
         <div class="title-line"></div>
@@ -111,13 +107,9 @@
         <div class="category-header">
             <h2>フロントエンド</h2>
 
-            <button
-                type="button"
-                class="add-button"
-                disabled
-            >
-                項目を追加する
-            </button>
+            <a th:href="@{/learning/add(categoryId=2, month=${selectedMonth})}" class="add-button">
+    項目を追加する
+</a>
         </div>
 
         <div class="title-line"></div>
@@ -172,13 +164,9 @@
         <div class="category-header">
             <h2>インフラ</h2>
 
-            <button
-                type="button"
-                class="add-button"
-                disabled
-            >
-                項目を追加する
-            </button>
+            <a th:href="@{/learning/add(categoryId=3, month=${selectedMonth})}" class="add-button">
+    項目を追加する
+</a>
         </div>
 
         <div class="title-line"></div>
