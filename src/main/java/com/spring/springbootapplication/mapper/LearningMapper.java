@@ -1,5 +1,6 @@
 package com.spring.springbootapplication.mapper;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -95,5 +96,15 @@ public interface LearningMapper {
         @Param("learningId") Long learningId,
         @Param("userId") Long userId,
         @Param("learningHours") Integer learningHours
+    );
+
+    @Delete("""
+        DELETE FROM learning_data
+        WHERE id = #{learningId}
+          AND user_id = #{userId}
+        """)
+    void deleteLearningData(
+        @Param("learningId") Long learningId,
+        @Param("userId") Long userId
     );
 }

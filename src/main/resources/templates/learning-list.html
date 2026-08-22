@@ -110,9 +110,10 @@
             </button>
 
             <button
-                type="button"
+                type="submit"
                 class="delete-button"
-                disabled
+                th:formaction="@{/learning/delete}"
+                formmethod="post"
             >
                 削除する
             </button>
@@ -190,9 +191,10 @@
             </button>
 
             <button
-                type="button"
+                type="submit"
                 class="delete-button"
-                disabled
+                th:formaction="@{/learning/delete}"
+                formmethod="post"
             >
                 削除する
             </button>
@@ -270,9 +272,10 @@
             </button>
 
             <button
-                type="button"
+                type="submit"
                 class="delete-button"
-                disabled
+                th:formaction="@{/learning/delete}"
+                formmethod="post"
             >
                 削除する
             </button>
@@ -307,5 +310,25 @@
     </div>
 </div>
 
+
+<div
+    class="modal-overlay"
+    th:if="${showDeleteSuccessModal}"
+>
+    <div class="success-modal">
+
+        <p class="success-message">
+            <span th:text="${deletedItemName}"></span>を削除しました！
+        </p>
+
+        <a
+            th:href="@{/learning(month=${selectedMonth})}"
+            class="back-button"
+        >
+            編集ページに戻る
+        </a>
+
+    </div>
+</div>
 </body>
 </html>

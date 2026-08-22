@@ -70,4 +70,14 @@ public class LearningService {
             userId,
             learningHours
         );
-    }}
+    }
+    public void deleteLearningData(
+            Long learningId,
+            Long userId) {
+
+        learningMapper.deleteLearningData(
+            learningId,
+            userId
+        );
+    }
+}
