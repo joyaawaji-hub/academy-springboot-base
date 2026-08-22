@@ -25,7 +25,14 @@
 
         <div class="profile-left">
 
-            <div class="avatar-placeholder"></div>
+            <div class="avatar-placeholder">
+    <img
+        th:if="${user != null and user['avatar_image'] != null}"
+        th:src="@{'/uploads/' + ${user['avatar_image']}}"
+        alt="プロフィール画像"
+        class="avatar-image"
+    >
+</div>
 
             <p
                 class="user-name"
@@ -40,11 +47,11 @@
                 自己紹介
             </h2>
 
-            <p class="introduction-text"></p>
+            <p class="introduction-text" th:text="${user != null ? user['self_introduction'] : ''}"></p>
 
-            <button type="button" class="edit-button">
+            <a th:href="@{/profile/edit}" class="edit-button">
                 自己紹介を編集する
-            </button>
+            </a>
 
         </div>
 

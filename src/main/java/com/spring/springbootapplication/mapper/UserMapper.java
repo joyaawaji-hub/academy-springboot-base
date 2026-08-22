@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.Map;
 
@@ -44,9 +45,25 @@ public interface UserMapper {
             id,
             email,
             password,
-            user_name
+            user_name,
+            self_introduction,
+            avatar_image
         FROM users
         WHERE email = #{email}
         """)
     Map<String, Object> findByEmail(@Param("email") String email);
+
+    @Update("""
+        UPDATE users
+        SET
+            self_introduction = #{selfIntroduction},
+            avatar_image = #{avatarImage},
+            updated_at = CURRENT_TIMESTAMP
+        WHERE email = #{email}
+        """)
+    void updateProfile(
+        @Param("email") String email,
+        @Param("selfIntroduction") String selfIntroduction,
+        @Param("avatarImage") String avatarImage
+    );
 }
