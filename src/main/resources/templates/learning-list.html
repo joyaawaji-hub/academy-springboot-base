@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>学習項目一覧 | My Portfolio</title>
+
+    <link rel="stylesheet" th:href="@{/css/learning-list.css}">
+</head>
+
+<body>
+
+<header class="header">
+    <h1 class="site-title">My Portfolio</h1>
+
+    <a th:href="@{/logout}" class="logout-button">
+        ログアウト
+    </a>
+</header>
+
+<main class="learning-container">
+
+    <form
+        th:action="@{/learning}"
+        method="get"
+        class="month-form"
+    >
+        <select
+            name="month"
+            class="month-select"
+            onchange="this.form.submit()"
+        >
+            <option
+                th:each="monthItem : ${selectableMonths}"
+                th:value="${monthItem}"
+                th:text="${monthItem.format(monthFormatter)}"
+                th:selected="${monthItem.equals(selectedMonth)}"
+            ></option>
+        </select>
+    </form>
+
+
+    <!-- =========================
+         バックエンド
+    ========================== -->
+
+    <section class="category-card">
+
+        <div class="category-header">
+            <h2>バックエンド</h2>
+
+            <button
+                type="button"
+                class="add-button"
+                disabled
+            >
+                項目を追加する
+            </button>
+        </div>
+
+        <div class="title-line"></div>
+
+        <div class="table-header">
+            <span>項目名</span>
+            <span>学習時間</span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div
+            class="learning-row"
+            th:each="data : ${learningData}"
+            th:if="${data['category_name'] == 'バックエンド' and data['learning_id'] != null}"
+        >
+            <span
+                class="item-name"
+                th:text="${data['item_name']}"
+            ></span>
+
+            <div class="hour-box">
+                <span th:text="${data['learning_hours']}"></span>
+            </div>
+
+            <button
+                type="button"
+                class="save-button"
+                disabled
+            >
+                学習時間を保存する
+            </button>
+
+            <button
+                type="button"
+                class="delete-button"
+                disabled
+            >
+                削除する
+            </button>
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         フロントエンド
+    ========================== -->
+
+    <section class="category-card">
+
+        <div class="category-header">
+            <h2>フロントエンド</h2>
+
+            <button
+                type="button"
+                class="add-button"
+                disabled
+            >
+                項目を追加する
+            </button>
+        </div>
+
+        <div class="title-line"></div>
+
+        <div class="table-header">
+            <span>項目名</span>
+            <span>学習時間</span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div
+            class="learning-row"
+            th:each="data : ${learningData}"
+            th:if="${data['category_name'] == 'フロントエンド' and data['learning_id'] != null}"
+        >
+            <span
+                class="item-name"
+                th:text="${data['item_name']}"
+            ></span>
+
+            <div class="hour-box">
+                <span th:text="${data['learning_hours']}"></span>
+            </div>
+
+            <button
+                type="button"
+                class="save-button"
+                disabled
+            >
+                学習時間を保存する
+            </button>
+
+            <button
+                type="button"
+                class="delete-button"
+                disabled
+            >
+                削除する
+            </button>
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         インフラ
+    ========================== -->
+
+    <section class="category-card">
+
+        <div class="category-header">
+            <h2>インフラ</h2>
+
+            <button
+                type="button"
+                class="add-button"
+                disabled
+            >
+                項目を追加する
+            </button>
+        </div>
+
+        <div class="title-line"></div>
+
+        <div class="table-header">
+            <span>項目名</span>
+            <span>学習時間</span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div
+            class="learning-row"
+            th:each="data : ${learningData}"
+            th:if="${data['category_name'] == 'インフラ' and data['learning_id'] != null}"
+        >
+            <span
+                class="item-name"
+                th:text="${data['item_name']}"
+            ></span>
+
+            <div class="hour-box">
+                <span th:text="${data['learning_hours']}"></span>
+            </div>
+
+            <button
+                type="button"
+                class="save-button"
+                disabled
+            >
+                学習時間を保存する
+            </button>
+
+            <button
+                type="button"
+                class="delete-button"
+                disabled
+            >
+                削除する
+            </button>
+        </div>
+
+    </section>
+
+</main>
+
+<footer class="footer">
+    <p>portfolio site</p>
+</footer>
+
+</body>
+</html>

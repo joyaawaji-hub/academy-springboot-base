@@ -1,0 +1,347 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    font-family:
+        "Noto Sans JP",
+        "Yu Gothic",
+        "Hiragino Kaku Gothic ProN",
+        Meiryo,
+        sans-serif;
+
+    color: #333;
+    background-color: #fff;
+}
+
+
+/* =========================
+   ヘッダー
+========================= */
+
+.header {
+    width: 100%;
+    height: 60px;
+
+    padding: 0 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: #1f5d7d;
+}
+
+.site-title {
+    margin: 0;
+
+    color: #fff;
+
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.logout-button {
+    width: 77px;
+    height: 27px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #fff;
+    color: #555;
+
+    border-radius: 2px;
+
+    text-decoration: none;
+
+    font-size: 8px;
+}
+
+
+/* =========================
+   メイン
+========================= */
+
+.learning-container {
+    width: 100%;
+    max-width: 435px;
+
+    margin: 0 auto;
+
+    padding: 20px 0 50px;
+
+    flex: 1;
+}
+
+
+/* =========================
+   月選択
+========================= */
+
+.month-form {
+    margin-bottom: 18px;
+}
+
+.month-select {
+    width: 43px;
+    height: 24px;
+
+    padding-left: 7px;
+
+    border: 1px solid #ddd;
+    border-radius: 2px;
+
+    background-color: #fff;
+
+    color: #222;
+
+    font-size: 11px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   カテゴリーカード
+========================= */
+
+.category-card {
+    width: 100%;
+
+    margin-bottom: 18px;
+    padding: 15px 17px 18px;
+
+    border: 1px solid #aaa;
+    border-radius: 4px;
+
+    background-color: #fff;
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.category-header h2 {
+    margin: 0;
+
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.title-line {
+    width: 108px;
+
+    margin-top: 5px;
+    margin-bottom: 15px;
+
+    border-bottom: 1px solid #888;
+}
+
+
+/* =========================
+   追加ボタン
+========================= */
+
+.add-button {
+    width: 80px;
+    height: 24px;
+
+    border: none;
+    border-radius: 2px;
+
+    background-color: #1f5d7d;
+    color: #fff;
+
+    font-size: 7px;
+}
+
+
+/* =========================
+   テーブル
+========================= */
+
+.table-header,
+.learning-row {
+    display: grid;
+
+    grid-template-columns:
+        minmax(90px, 1fr)
+        72px
+        105px
+        58px;
+
+    align-items: center;
+
+    column-gap: 10px;
+}
+
+.table-header {
+    height: 28px;
+
+    padding: 0 8px;
+
+    border-bottom: 1px solid #eee;
+
+    font-size: 7px;
+}
+
+.learning-row {
+    min-height: 34px;
+
+    padding: 5px 8px;
+
+    border-bottom: 1px solid #eee;
+
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+
+    font-size: 7px;
+}
+
+.item-name {
+    min-width: 0;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* =========================
+   学習時間
+========================= */
+
+.hour-box {
+    width: 72px;
+    height: 22px;
+
+    padding: 0 7px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    border: 1px solid #ccc;
+    border-radius: 2px;
+
+    background-color: #fff;
+
+    color: #777;
+
+    font-size: 7px;
+}
+
+
+/* =========================
+   保存・削除ボタン
+========================= */
+
+.save-button {
+    width: 105px;
+    height: 22px;
+
+    border: 1px solid #1f5d7d;
+    border-radius: 2px;
+
+    background-color: #fff;
+    color: #1f5d7d;
+
+    font-size: 6px;
+}
+
+.delete-button {
+    width: 58px;
+    height: 22px;
+
+    border: none;
+    border-radius: 2px;
+
+    background-color: #ff6b6b;
+    color: #fff;
+
+    font-size: 6px;
+}
+
+
+/*
+   今回のチケットでは追加・保存・削除処理は未実装。
+   disabledでもデザインを参考画像と同じ状態で表示する。
+*/
+
+button:disabled {
+    opacity: 1;
+    cursor: default;
+}
+
+
+/* =========================
+   フッター
+========================= */
+
+.footer {
+    width: 100%;
+    height: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #1f5d7d;
+}
+
+.footer p {
+    margin: 0;
+
+    color: #fff;
+
+    font-size: 7px;
+}
+
+
+/* =========================
+   スマホ
+========================= */
+
+@media (max-width: 500px) {
+
+    .learning-container {
+        width: calc(100% - 24px);
+    }
+
+    .table-header,
+    .learning-row {
+        grid-template-columns:
+            minmax(70px, 1fr)
+            60px
+            85px
+            50px;
+
+        column-gap: 5px;
+    }
+
+    .hour-box {
+        width: 60px;
+    }
+
+    .save-button {
+        width: 85px;
+    }
+
+    .delete-button {
+        width: 50px;
+    }
+}
