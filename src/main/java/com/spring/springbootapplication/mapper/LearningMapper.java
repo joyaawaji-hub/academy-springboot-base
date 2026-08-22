@@ -107,4 +107,28 @@ public interface LearningMapper {
         @Param("learningId") Long learningId,
         @Param("userId") Long userId
     );
+
+    @Select("""
+        SELECT
+            c.category_name,
+            ld.learning_month,
+            COALESCE(SUM(ld.learning_hours), 0) AS total_hours
+        FROM categories c
+        JOIN learning_data ld
+            ON c.id = ld.category_id
+        WHERE ld.user_id = #{userId}
+          AND ld.learning_month BETWEEN #{fromMonth} AND #{toMonth}
+        GROUP BY
+            c.category_name,
+            ld.learning_month,
+            c.sort_order
+        ORDER BY
+            ld.learning_month,
+            c.sort_order
+        """)
+    List<Map<String, Object>> findChartData(
+        @Param("userId") Long userId,
+        @Param("fromMonth") LocalDate fromMonth,
+        @Param("toMonth") LocalDate toMonth
+    );
 }

@@ -26,13 +26,13 @@
         <div class="profile-left">
 
             <div class="avatar-placeholder">
-    <img
-        th:if="${user != null and user['avatar_image'] != null}"
-        th:src="@{'/uploads/' + ${user['avatar_image']}}"
-        alt="プロフィール画像"
-        class="avatar-image"
-    >
-</div>
+                <img
+                    th:if="${user != null and user['avatar_image'] != null}"
+                    th:src="@{'/uploads/' + ${user['avatar_image']}}"
+                    alt="プロフィール画像"
+                    class="avatar-image"
+                >
+            </div>
 
             <p
                 class="user-name"
@@ -47,12 +47,40 @@
                 自己紹介
             </h2>
 
-            <p class="introduction-text" th:text="${user != null ? user['self_introduction'] : ''}"></p>
+            <p
+                class="introduction-text"
+                th:text="${user != null ? user['self_introduction'] : ''}"
+            ></p>
 
-            <a th:href="@{/profile/edit}" class="edit-button">
+            <a
+                th:href="@{/profile/edit}"
+                class="edit-button"
+            >
                 自己紹介を編集する
             </a>
 
+        </div>
+
+    </section>
+
+
+    <section class="chart-section">
+
+        <h2 class="chart-heading">
+            学習チャート
+        </h2>
+
+        <div class="chart-title-line"></div>
+
+        <a
+            th:href="@{/learning}"
+            class="chart-edit-button"
+        >
+            編集する
+        </a>
+
+        <div class="chart-container">
+            <canvas id="learningChart"></canvas>
         </div>
 
     </section>
@@ -62,6 +90,68 @@
 <footer class="footer">
     <p>portfolio site</p>
 </footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script th:inline="javascript">
+    const chartLabels = /*[[${chartLabels}]]*/ [];
+    const backendData = /*[[${backendData}]]*/ [];
+    const frontendData = /*[[${frontendData}]]*/ [];
+    const infrastructureData = /*[[${infrastructureData}]]*/ [];
+
+    const context =
+        document.getElementById('learningChart');
+
+    new Chart(context, {
+        type: 'bar',
+
+        data: {
+            labels: chartLabels,
+
+            datasets: [
+                {
+                    label: 'バックエンド',
+                    data: backendData,
+                    backgroundColor: '#f4b6c2'
+                },
+                {
+                    label: 'フロントエンド',
+                    data: frontendData,
+                    backgroundColor: '#f4c38d'
+                },
+                {
+                    label: 'インフラ',
+                    data: infrastructureData,
+                    backgroundColor: '#f5dda0'
+                }
+            ]
+        },
+
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        boxWidth: 18,
+                        font: {
+                            size: 9
+                        }
+                    }
+                }
+            },
+
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 
 </body>
 </html>
