@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新規登録 | My Portfolio</title>
+
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+
+<body>
+
+<header class="register-header">
+    <h1 class="site-title">My Portfolio</h1>
+
+    <a th:href="@{/login}" class="header-login-button">
+        ログイン
+    </a>
+</header>
+
+<main class="login-container">
+
+    <h2 class="page-title">新規登録</h2>
+
+    <form
+        class="login-form"
+        th:action="@{/register}"
+        th:object="${registerForm}"
+        method="post"
+    >
+
+        <div class="form-group">
+            <label for="userName">氏名</label>
+
+            <input
+                type="text"
+                id="userName"
+                th:field="*{userName}"
+            >
+
+            <p
+                class="error-message"
+                th:if="${#fields.hasErrors('userName')}"
+                th:errors="*{userName}"
+            ></p>
+        </div>
+
+        <div class="form-group">
+            <label for="email">メールアドレス</label>
+
+            <input
+                type="email"
+                id="email"
+                th:field="*{email}"
+                autocomplete="email"
+            >
+
+            <p
+                class="error-message"
+                th:if="${#fields.hasErrors('email')}"
+                th:errors="*{email}"
+            ></p>
+        </div>
+
+        <div class="form-group">
+            <label for="password">パスワード</label>
+
+            <input
+                type="password"
+                id="password"
+                th:field="*{password}"
+                autocomplete="new-password"
+            >
+
+            <p
+                class="error-message"
+                th:if="${#fields.hasErrors('password')}"
+                th:errors="*{password}"
+            ></p>
+        </div>
+
+        <button type="submit" class="login-button">
+            新規登録する
+        </button>
+
+        <a th:href="@{/login}" class="register-button">
+            ログイン画面へ戻る
+        </a>
+
+    </form>
+
+</main>
+
+<footer class="footer">
+    <p>Portfolio site</p>
+</footer>
+
+
+</body>
+</html>
