@@ -12,7 +12,7 @@
 <body>
 
 <header class="profile-header">
-    <h1 class="site-title">My Portfolio</h1>
+    <a th:href="@{/top}" class="site-title">My Portfolio</a>
 
     <a th:href="@{/logout}" class="logout-button">
         ログアウト
@@ -64,11 +64,12 @@
             </label>
 
             <input
-                type="file"
-                id="avatarImage"
-                name="avatarImage"
-                accept="image/*"
-            >
+                  type="file"
+                  id="avatarImage"
+                  name="avatarImage"
+                  accept="image/*"
+                  onclick="this.value=''"
+              >
 
             <p
                 id="fileName"

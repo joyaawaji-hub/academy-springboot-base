@@ -80,4 +80,16 @@ public class LearningService {
             userId
         );
     }
+
+    public List<Map<String, Object>> findChartData(
+            Long userId,
+            LocalDate fromMonth,
+            LocalDate toMonth) {
+
+        return learningMapper.findChartData(
+            userId,
+            fromMonth,
+            toMonth
+        );
+    }
 }

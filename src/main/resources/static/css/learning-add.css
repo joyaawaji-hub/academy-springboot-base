@@ -259,3 +259,7 @@ body {
     color: #fff;
     font-size: 7px;
 }
+/* site title link */
+.site-title {
+    text-decoration: none;
+}
