@@ -18,7 +18,6 @@ public interface LearningMapper {
         SELECT
             c.id AS category_id,
             c.category_name,
-            c.sort_order,
             ld.id AS learning_id,
             ld.item_name,
             ld.learning_hours
@@ -28,7 +27,7 @@ public interface LearningMapper {
             AND ld.user_id = #{userId}
             AND ld.learning_month = #{learningMonth}
         ORDER BY
-            c.sort_order,
+            c.id,
             ld.id
         """)
     List<Map<String, Object>> findLearningData(
@@ -119,12 +118,12 @@ public interface LearningMapper {
         WHERE ld.user_id = #{userId}
           AND ld.learning_month BETWEEN #{fromMonth} AND #{toMonth}
         GROUP BY
+            c.id,
             c.category_name,
-            ld.learning_month,
-            c.sort_order
+            ld.learning_month
         ORDER BY
             ld.learning_month,
-            c.sort_order
+            c.id
         """)
     List<Map<String, Object>> findChartData(
         @Param("userId") Long userId,
