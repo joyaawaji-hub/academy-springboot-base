@@ -1,7 +1,3 @@
-/* =========================
-   全体
-========================= */
-
 * {
     box-sizing: border-box;
 }
@@ -29,13 +25,12 @@ body {
     min-height: 100vh;
 }
 
-
 /* =========================
    ヘッダー
 ========================= */
 
 .header {
-    height: 56px;
+    height: 80px;
     background-color: #1f5d7d;
 
     display: flex;
@@ -45,11 +40,11 @@ body {
 
 .site-title {
     margin: 0;
+
     color: #fff;
-    font-size: 16px;
+    font-size: 24px;
     font-weight: bold;
 }
-
 
 /* =========================
    ログインエリア
@@ -57,52 +52,52 @@ body {
 
 .login-container {
     width: 100%;
-    max-width: 430px;
+    max-width: 480px;
 
     margin: 0 auto;
-    padding-top: 38px;
+    padding: 32px 20px 45px;
 
     flex: 1;
 }
 
 .page-title {
-    margin: 0 0 35px;
+    margin: 0 0 30px;
 
     text-align: center;
 
-    font-size: 18px;
+    font-size: 20px;
     font-weight: normal;
     color: #333;
 }
-
 
 /* =========================
    フォーム
 ========================= */
 
 .login-form {
-    width: 216px;
+    width: 250px;
+
     margin: 0 auto;
 }
 
 .form-group {
-    margin-bottom: 22px;
+    margin-bottom: 20px;
 }
 
 .form-group label {
     display: block;
 
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 
-    font-size: 7px;
+    font-size: 10px;
     color: #888;
 }
 
 .form-group input {
     width: 100%;
-    height: 23px;
+    height: 28px;
 
-    padding: 2px 0;
+    padding: 5px 0;
 
     border: none;
     border-bottom: 1px solid #bdbdbd;
@@ -119,7 +114,6 @@ body {
     border-bottom: 1px solid #1f5d7d;
 }
 
-
 /* =========================
    ログインボタン
 ========================= */
@@ -127,18 +121,18 @@ body {
 .login-button {
     display: block;
 
-    width: 121px;
-    height: 24px;
+    width: 140px;
+    height: 29px;
 
-    margin: 21px auto 0;
+    margin: 32px auto 0;
 
     border: none;
-    border-radius: 2px;
+    border-radius: 3px;
 
     background-color: #1f5d7d;
     color: #fff;
 
-    font-size: 8px;
+    font-size: 11px;
 
     cursor: pointer;
 }
@@ -147,7 +141,6 @@ body {
     opacity: 0.9;
 }
 
-
 /* =========================
    新規登録ボタン
 ========================= */
@@ -155,35 +148,81 @@ body {
 .register-button {
     display: flex;
 
-    width: 121px;
-    height: 24px;
+    width: 140px;
+    height: 29px;
 
-    margin: 21px auto 0;
+    margin: 28px auto 0;
 
     align-items: center;
     justify-content: center;
 
-    border-radius: 2px;
+    border-radius: 3px;
 
     background-color: #1f5d7d;
     color: #fff;
 
     text-decoration: none;
 
-    font-size: 8px;
+    font-size: 11px;
 }
 
 .register-button:hover {
     opacity: 0.9;
 }
 
+/* =========================
+   エラーメッセージ
+========================= */
+
+.error-message {
+    margin: 7px 0 0;
+
+    color: #e53935;
+    font-size: 10px;
+}
+
+/* =========================
+   新規登録画面ヘッダー
+========================= */
+
+.register-header {
+    height: 80px;
+    padding: 0 40px;
+
+    background-color: #1f5d7d;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-login-button {
+    width: 120px;
+    height: 29px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #fff;
+    color: #555;
+
+    border-radius: 3px;
+
+    text-decoration: none;
+    font-size: 11px;
+}
+
+.header-login-button:hover {
+    opacity: 0.9;
+}
 
 /* =========================
    フッター
 ========================= */
 
 .footer {
-    height: 18px;
+    height: 29px;
 
     display: flex;
     align-items: center;
@@ -196,98 +235,56 @@ body {
     margin: 0;
 
     color: #fff;
-    font-size: 7px;
-}
-
-
-/* =========================
-   「数」アイコン
-========================= */
-
-.number-icon {
-    position: fixed;
-
-    right: 24px;
-    top: 118px;
-
-    width: 48px;
-    height: 48px;
-
-    border-radius: 50%;
-
-    background-color: #111;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    box-shadow:
-        0 2px 5px rgba(0, 0, 0, 0.35);
-
-    z-index: 10;
-}
-
-.number-icon::before {
-    content: "";
-
-    position: absolute;
-
-    width: 34px;
-    height: 34px;
-
-    border-radius: 50%;
-
-    background-color: #ff4b32;
-}
-
-.number-icon span {
-    position: relative;
-
-    color: #fff;
-
-    font-size: 18px;
-    font-weight: bold;
-
-    z-index: 1;
-}
-.error-message {
-    margin: 5px 0 0;
-    color: #e53935;
-    font-size: 8px;
+    font-size: 10px;
 }
 
 /* =========================
-   新規登録画面専用ヘッダー
+   スマホ対応
 ========================= */
 
-.register-header {
-    height: 56px;
-    padding: 0 24px;
+@media (max-width: 700px) {
 
-    background-color: #1f5d7d;
+    .header,
+    .register-header {
+        height: 65px;
+    }
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+    .register-header {
+        padding: 0 20px;
+    }
 
-.header-login-button {
-    width: 82px;
-    height: 28px;
+    .site-title {
+        font-size: 20px;
+    }
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    .header-login-button {
+        width: 95px;
+        height: 29px;
+        font-size: 10px;
+    }
 
-    background-color: #fff;
-    color: #555;
+    .login-container {
+        padding: 40px 20px 60px;
+    }
 
-    border-radius: 2px;
+    .page-title {
+        margin-bottom: 40px;
+        font-size: 20px;
+    }
 
-    text-decoration: none;
-    font-size: 9px;
-}
+    .login-form {
+        width: 100%;
+        max-width: 250px;
+    }
 
-.header-login-button:hover {
-    opacity: 0.9;
+    .form-group input {
+        font-size: 15px;
+    }
+
+    .login-button,
+    .register-button {
+        width: 140px;
+        height: 29px;
+        font-size: 10px;
+    }
 }

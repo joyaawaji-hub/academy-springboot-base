@@ -263,3 +263,13 @@ body {
 .site-title {
     text-decoration: none;
 }
+/* ===== Learning画面のみ125%表示 ===== */
+
+.learning-scale-page main {
+    zoom: 1.25;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ===== Learning画面のみ125%表示 END ===== */

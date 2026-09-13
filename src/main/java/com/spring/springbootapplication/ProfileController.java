@@ -25,6 +25,12 @@ public class ProfileController {
 
     private final UserService userService;
 
+    private static final Path UPLOAD_DIRECTORY =
+        Paths.get("uploads");
+
+    private static final Path TEMP_DIRECTORY =
+        Paths.get("uploads", "temp");
+
     public ProfileController(UserService userService) {
         this.userService = userService;
     }
@@ -85,7 +91,39 @@ public class ProfileController {
         Map<String, Object> user =
             userService.findByEmail(email);
 
+        MultipartFile avatar =
+            profileForm.getAvatarImage();
+
+        System.out.println(
+            "自己紹介文字数: " +
+            (profileForm.getSelfIntroduction() == null
+                ? "null"
+                : profileForm.getSelfIntroduction().length())
+        );
+
+        /*
+         * バリデーションエラーでも
+         * 選択された画像を一時保存する。
+         */
         if (bindingResult.hasErrors()) {
+
+            if (avatar != null && !avatar.isEmpty()) {
+
+                deleteTemporaryFile(
+                    profileForm.getRetainedAvatarFileName()
+                );
+
+                String temporaryFileName =
+                    saveTemporaryFile(avatar);
+
+                profileForm.setRetainedAvatarFileName(
+                    temporaryFileName
+                );
+
+                profileForm.setRetainedAvatarOriginalName(
+                    avatar.getOriginalFilename()
+                );
+            }
 
             model.addAttribute(
                 "currentAvatarImage",
@@ -102,41 +140,31 @@ public class ProfileController {
                 ? (String) user.get("avatar_image")
                 : null;
 
-        MultipartFile avatar =
-            profileForm.getAvatarImage();
-
+        /*
+         * 今回新しくファイルを選択した場合
+         */
         if (avatar != null && !avatar.isEmpty()) {
 
-            String originalFileName =
-                avatar.getOriginalFilename();
-
-            String extension = "";
-
-            if (originalFileName != null &&
-                originalFileName.contains(".")) {
-
-                extension =
-                    originalFileName.substring(
-                        originalFileName.lastIndexOf(".")
-                    );
-            }
+            deleteTemporaryFile(
+                profileForm.getRetainedAvatarFileName()
+            );
 
             avatarFileName =
-                UUID.randomUUID() + extension;
+                savePermanentFile(avatar);
 
-            Path uploadDirectory =
-                Paths.get("uploads");
+        /*
+         * バリデーションエラー前に選択していた
+         * 一時ファイルがある場合
+         */
+        } else if (
+            profileForm.getRetainedAvatarFileName() != null &&
+            !profileForm.getRetainedAvatarFileName().isBlank()
+        ) {
 
-            Files.createDirectories(uploadDirectory);
-
-            Path destination =
-                uploadDirectory.resolve(avatarFileName);
-
-            Files.copy(
-                avatar.getInputStream(),
-                destination,
-                StandardCopyOption.REPLACE_EXISTING
-            );
+            avatarFileName =
+                moveTemporaryFileToPermanent(
+                    profileForm.getRetainedAvatarFileName()
+                );
         }
 
         userService.updateProfile(
@@ -146,5 +174,113 @@ public class ProfileController {
         );
 
         return "redirect:/top";
+    }
+
+    private String saveTemporaryFile(
+            MultipartFile file) throws IOException {
+
+        Files.createDirectories(TEMP_DIRECTORY);
+
+        String fileName =
+            createSafeFileName(file.getOriginalFilename());
+
+        Path destination =
+            TEMP_DIRECTORY.resolve(fileName);
+
+        Files.copy(
+            file.getInputStream(),
+            destination,
+            StandardCopyOption.REPLACE_EXISTING
+        );
+
+        return fileName;
+    }
+
+    private String savePermanentFile(
+            MultipartFile file) throws IOException {
+
+        Files.createDirectories(UPLOAD_DIRECTORY);
+
+        String fileName =
+            createSafeFileName(file.getOriginalFilename());
+
+        Path destination =
+            UPLOAD_DIRECTORY.resolve(fileName);
+
+        Files.copy(
+            file.getInputStream(),
+            destination,
+            StandardCopyOption.REPLACE_EXISTING
+        );
+
+        return fileName;
+    }
+
+    private String moveTemporaryFileToPermanent(
+            String retainedFileName) throws IOException {
+
+        Files.createDirectories(UPLOAD_DIRECTORY);
+
+        String safeFileName =
+            Paths.get(retainedFileName)
+                .getFileName()
+                .toString();
+
+        Path temporaryFile =
+            TEMP_DIRECTORY.resolve(safeFileName);
+
+        if (!Files.exists(temporaryFile)) {
+            return null;
+        }
+
+        Path destination =
+            UPLOAD_DIRECTORY.resolve(safeFileName);
+
+        Files.move(
+            temporaryFile,
+            destination,
+            StandardCopyOption.REPLACE_EXISTING
+        );
+
+        return safeFileName;
+    }
+
+    private void deleteTemporaryFile(
+            String retainedFileName) throws IOException {
+
+        if (retainedFileName == null ||
+            retainedFileName.isBlank()) {
+            return;
+        }
+
+        String safeFileName =
+            Paths.get(retainedFileName)
+                .getFileName()
+                .toString();
+
+        Files.deleteIfExists(
+            TEMP_DIRECTORY.resolve(safeFileName)
+        );
+    }
+
+    private String createSafeFileName(
+            String originalFileName) {
+
+        String extension = "";
+
+        if (originalFileName != null &&
+            originalFileName.contains(".")) {
+
+            String candidate =
+                originalFileName.substring(
+                    originalFileName.lastIndexOf(".")
+                );
+
+            if (candidate.matches("\\.[A-Za-z0-9]{1,10}")) {
+                extension = candidate;
+            }
+        }
+
+        return UUID.randomUUID() + extension;
     }
 }
