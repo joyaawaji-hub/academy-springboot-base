@@ -3,23 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>自己紹介編集 | My Portfolio</title>
-
     <link rel="stylesheet" th:href="@{/css/profile-edit.css}">
 </head>
 
 <body>
 
-<header class="profile-header">
-    <a th:href="@{/top}" class="site-title">My Portfolio</a>
+<header class="header">
+    <div class="header-inner">
+        <h1 class="logo">
+            <a th:href="@{/top}" class="logo-link">My Portfolio</a>
+        </h1>
 
-    <a th:href="@{/logout}" class="logout-button">
-        ログアウト
-    </a>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="logout-button">
+                ログアウト
+            </button>
+        </form>
+    </div>
 </header>
 
-<main class="profile-edit-container">
+
+<main class="main">
 
     <h2 class="page-title">
         自己紹介を編集する
@@ -33,76 +38,102 @@
         class="profile-form"
     >
 
-        <div class="form-group">
+        <input
+            type="hidden"
+            th:field="*{retainedAvatarFileName}"
+        >
 
-            <label for="selfIntroduction">
+        <input
+            type="hidden"
+            th:field="*{retainedAvatarOriginalName}"
+        >
+
+
+        <div class="form-group introduction-group">
+
+            <label
+                for="selfIntroduction"
+                class="form-label"
+            >
                 自己紹介文
             </label>
 
             <textarea
                 id="selfIntroduction"
                 th:field="*{selfIntroduction}"
-                maxlength="200"
+                class="introduction-textarea"
             ></textarea>
 
-            <p class="help-text">
-                50文字以上、200文字以下で入力してください
-            </p>
-
             <p
-                class="error-message"
+                class="validation-error"
                 th:if="${#fields.hasErrors('selfIntroduction')}"
                 th:errors="*{selfIntroduction}"
             ></p>
 
         </div>
 
-        <div class="form-group">
 
-            <label for="avatarImage">
+        <div class="form-group avatar-group">
+
+            <p class="form-label">
                 アバター画像
-            </label>
+            </p>
 
             <input
-                  type="file"
-                  id="avatarImage"
-                  name="avatarImage"
-                  accept="image/*"
-                  onclick="this.value=''"
-              >
+                type="file"
+                id="avatarImage"
+                name="avatarImage"
+                accept="image/*"
+                class="avatar-input"
+            >
+
+            <label
+                for="avatarImage"
+                class="file-select-button"
+            >
+                画像ファイルを添付する
+            </label>
 
             <p
-                id="fileName"
-                class="file-name"
-                th:text="${currentAvatarImage}"
+                id="fileStatus"
+                class="file-status"
+                th:text="${profileForm.retainedAvatarOriginalName != null and !#strings.isEmpty(profileForm.retainedAvatarOriginalName)
+                    ? '選択済み：' + profileForm.retainedAvatarOriginalName
+                    : ''}"
             ></p>
 
         </div>
 
-        <button
-            type="submit"
-            class="confirm-button"
-        >
-            自己紹介を確定する
-        </button>
+
+        <div class="submit-area">
+
+            <button
+                type="submit"
+                class="confirm-button"
+            >
+                自己紹介を確定する
+            </button>
+
+        </div>
 
     </form>
 
 </main>
 
+
 <footer class="footer">
-    <p>portfolio site</p>
+    portfolio site
 </footer>
 
+
 <script>
+
     const avatarInput = document.getElementById('avatarImage');
-    const fileName = document.getElementById('fileName');
+    const fileStatus = document.getElementById('fileStatus');
 
     avatarInput.addEventListener('change', function () {
-        if (this.files.length > 0) {
-            fileName.textContent = this.files[0].name;
-        } else {
-            fileName.textContent = '';
+        if (this.files && this.files.length > 0) {
+            fileStatus.textContent = '選択済み：' + this.files[0].name;
         }
     });
 </script>
